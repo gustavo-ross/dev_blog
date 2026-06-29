@@ -6,6 +6,4 @@ def home(request):
 
 
 def sobre_nos(request):
-    mensagem = "<h1>Sobre o Devblog!</h1> <p>Ainda nem existe, então não tem muito o que falar.</p>"
-
-    return HttpResponse(mensagem)
+    return render(request, 'blog/sobre.html')
