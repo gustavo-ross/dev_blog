@@ -15,17 +15,22 @@
             <div class="container">
                 <a class="navbar-brand" href="{% url 'home' %}">👍 DevBlog</a>
                 
-                <!-- Botão 'hambúrguer' para telas de celular -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 
-                <!-- A classe navbar-collapse agora está correta -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'home' %}">Inicio</a> 
                         </li>
+                        
+                        {% for categoria in lista_categorias %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}?categoria={{ categoria.id }}">{{ categoria.nome }}</a>
+                        </li>
+                        {% endfor %}
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'sobre_nos' %}">Sobre</a> 
                         </li>
@@ -37,7 +42,6 @@
 
     <main class="container my-5 flex-grow-1">
         {% block content %}
-        <!-- AQUI VAI O CONTEÚDO DAS OUTRAS PAGINAS -->
         {% endblock %}
     </main>
 
@@ -45,7 +49,6 @@
         <p class="mb-0">© 2026 Desenvolvido pela Turma Python</p>
     </footer>
 
-    <!-- Script do Bootstrap (Necessário para o menu responsivo de celular funcionar) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>

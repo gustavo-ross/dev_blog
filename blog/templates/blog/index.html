@@ -3,9 +3,15 @@
 
 {% block content %}
 
-    <h2>Últimas Notícias de Tecnologia</h2>
+    <h2>
+        {% if categoria_atual %}
+            Últimas notícias de {{ categoria_atual.nome }}
+        {% else %}
+            Últimas Notícias de Tecnologia
+        {% endif %}
+    </h2>
     
-    {% for artigo in lista_artigos %}
+    <br> {% for artigo in lista_artigos %}
 
         <div class="card mb-3 shadow-sm">
             <div class="card-body">
