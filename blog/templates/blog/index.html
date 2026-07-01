@@ -3,7 +3,23 @@
 
 {% block content %}
 
-    <h3>Últimas Notícias de Tecnologia</h3>
-    <p>Bem-vindo ao DevBlog! Nossos redatores já estão trabalhando nos artigos.</p>
+    <h2>Últimas Notícias de Tecnologia</h2>
+    
+    {% for artigo in lista_artigos %}
+
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title text-success">{{ artigo.titulo }}</h3>
+                <h6 class="card-subtitle mb-2 text-muted">Categoria: {{ artigo.categoria.nome }} | Autor: {{ artigo.autor }}</h6>
+                <p class="card-text">{{ artigo.conteudo }}</p>
+                <p class="card-text"><small class="text-muted">Publicação em: {{ artigo.data_publicacao }}</small></p>
+            </div>
+        </div>
+
+    {% empty %}
+    
+        <p>Nenhuma notícia publicada ainda.</p>
+    
+    {% endfor %}
 
 {% endblock %}
