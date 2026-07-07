@@ -10,5 +10,6 @@ urlpatterns = [
     # APIs #
 
     path('api/artigos/', views.api_listar_artigos, name='api_artigos'),
+    path('api/artigos/novo', views.api_criar_artigo, name='api_criar_artigo'),
     path('api/categorias/', views.api_listar_categorias, name='api_categorias'),
 ]
