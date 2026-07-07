@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm mb-4">← Voltar</a>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="text-primary">{{ artigo.titulo }}</h1>
+
+            <p class="text-muted">
+                <strong>Por:</strong> {{ artigo.autor }} |
+                <strong>Categoria:</strong> {{ artigo.categoria.nome }}
+            </p>
+            <hr>
+            <p style="font-size: 1.1rem; line-height: 1.8;">{{ artigo.conteudo }}</p>
+        </div>
+    </div>
+{% endblock %}

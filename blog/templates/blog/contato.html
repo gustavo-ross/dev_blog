@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>Fale Conosco</h2>
+    <p>Envie-nos uma mensagem, crítica ou sugestão.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary mt-3">Enviar Mensagem</button>
+    </form>
+{% endblock %}
