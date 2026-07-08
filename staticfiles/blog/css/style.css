@@ -1,0 +1,115 @@
+/* Reset básico para garantir que o layout se comporte bem */
+.lapalma-section * {
+    box-sizing: border-box;
+}
+
+.lapalma-section {
+    background-color: #f3efe9; /* Cor de fundo off-white da referência */
+    color: #222;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Tipografia clean */
+    padding: 60px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.lapalma-title {
+    font-size: 6vw; /* Usa viewport width para escalar o texto elegantemente */
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    margin: 0 0 30px 0;
+    line-height: 1;
+}
+
+.lapalma-divider {
+    border: none;
+    border-top: 1px solid #d1cec7;
+    margin: 0 0 30px 0;
+}
+
+/* O Grid superior contendo os dois parágrafos e o link */
+.lapalma-grid-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.lapalma-text-small {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 400;
+    max-width: 90%;
+}
+
+.lapalma-link-container {
+    display: flex;
+    justify-content: flex-end; /* Alinha o link à direita na terceira coluna */
+    align-items: flex-start;
+}
+
+.lapalma-link-container a {
+    color: #222;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.lapalma-link-container a:hover {
+    text-decoration: underline;
+}
+
+/* Área da imagem */
+.lapalma-image-wrapper {
+    width: 100%;
+    margin-bottom: 80px;
+}
+
+.lapalma-placeholder-img {
+    width: 100%;
+    height: 60vh; /* Ocupa uma boa parte da tela para dar destaque */
+    background-color: #e0dcd5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 1.2rem;
+}
+
+/* Para usar uma imagem real, substitua a div acima por esta tag:
+    .lapalma-image-wrapper img { width: 100%; height: auto; display: block; } 
+*/
+
+/* Texto centralizado do rodapé */
+.lapalma-footer-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+/* Responsividade para tablets e celulares */
+@media (max-width: 900px) {
+    .lapalma-title {
+        font-size: 3.5rem;
+    }
+    .lapalma-grid-top {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .lapalma-link-container {
+        justify-content: flex-start;
+        margin-top: 10px;
+    }
+    .lapalma-footer-text {
+        font-size: 1.2rem;
+        text-align: left;
+    }
+    .lapalma-section {
+        padding: 40px 20px;
+    }
+}
