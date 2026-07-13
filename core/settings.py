@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     # só sobrescreve o template nativo do admin se for encontrado primeiro.
     'blog',
 
-    'cloudinary_storage',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'cloudinary_storage',
     'cloudinary',
 
     'rest_framework',
