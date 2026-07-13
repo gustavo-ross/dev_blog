@@ -1,33 +1,40 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 
-{% block content %}
+{% block title %}UXBlog — Notícias de tecnologia{% endblock %}
 
-    <h2>
+{% block content %}
+<section class="container" style="padding-block: var(--space-8);">
+
+    <h1 class="title-deco title-deco--home">
+        <span class="title-deco__dot-wrap title-deco__dot-wrap--start" aria-hidden="true"><span class="title-deco__dot"></span></span>
         {% if categoria_atual %}
             Últimas notícias de {{ categoria_atual.nome }}
         {% else %}
-            Últimas Notícias de Tecnologia
+            Veja as últimas notícias de tecnologia
         {% endif %}
-    </h2>
-    
-    <br> {% for artigo in lista_artigos %}
+        <span class="title-deco__dot-wrap title-deco__dot-wrap--end" aria-hidden="true"><span class="title-deco__dot"></span></span>
+    </h1>
 
-        <div class="card mb-3 shadow-sm">
-            <div class="card-body">
-                <h3 class="card-title text-success">{{ artigo.titulo }}</h3>
-                <h6 class="card-subtitle mb-2 text-muted">Categoria: {{ artigo.categoria.nome }}</h6>
+    <ul class="article-list" id="article-list">
+        {% include 'blog/partials/artigo_cards.html' %}
+    </ul>
 
-                <p class="card-text">{{ artigo.conteudo|truncatechars:100 }}</p>
+    {% if page_obj.has_next %}
+    <div class="load-more" style="margin-top: var(--space-8);">
+        <button
+            type="button"
+            class="btn"
+            id="load-more-btn"
+            data-url="{% url 'home' %}"
+            data-next-page="{{ page_obj.next_page_number }}"
+            data-categoria="{{ categoria_atual.id|default_if_none:'' }}"
+        >
+            Ver mais
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+    </div>
+    {% endif %}
 
-                <a href="{% url 'detalhe_artigo' artigo.id %}" class="btn btn-success btn-sm">Ler mais</a>
-            </div>
-        </div>
-
-    {% empty %}
-    
-        <p>Nenhuma notícia publicada ainda.</p>
-    
-    {% endfor %}
-
+</section>
 {% endblock %}

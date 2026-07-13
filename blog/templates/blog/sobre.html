@@ -1,30 +1,54 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 
+{% block title %}Sobre nós — UXBlog{% endblock %}
+
 {% block content %}
-<div class="lapalma-section">
-    <h1 class="lapalma-title">SOBRE</h1>
-    
-    <hr class="lapalma-divider">
-    
-    <div class="lapalma-grid-top">
-        <div class="lapalma-text-small">
-            Este é um projeto de Blog com Django que estou desenvolvendo no curso de Python do Senac Tech
-        </div>
-        <div class="lapalma-text-small">
-            Sobre mim: Meu nome é Gustavo, tenho 25 anos, sou Product Designer com 5 anos de experência, gosto de lasanha. Atualmente estou montando uma empresa de vídeomaking com a minha namorada, e buscando projetos para gringa além dos meus freelas atuais.
-        </div>
-        <div>
+<section class="container about-content">
+
+    <h1 class="title-deco title-deco--page">
+        <span class="title-deco__dot-wrap title-deco__dot-wrap--start" aria-hidden="true"><span class="title-deco__dot"></span></span>
+        Sobre nós
+        <span class="title-deco__dot-wrap title-deco__dot-wrap--end" aria-hidden="true"><span class="title-deco__dot"></span></span>
+    </h1>
+
+    <hr class="divider">
+
+    <div class="about-row">
+        <p class="about-row__text"><strong>O UXBlog</strong> é um espaço colaborativo mantido por um time apaixonado por Experiência do Usuário e interfaces digitais.</p>
+        <p class="about-row__text">Somos uma equipe plural formada por Product Designers, pesquisadores e estrategistas dedicados a desmistificar o universo do design. Acreditamos que criar produtos digitais vai muito além de construir telas; trata-se de resolver problemas reais e facilitar o dia a dia das pessoas. Nossa missão com o UXBlog é compartilhar estudos, debater metodologias de mercado e explorar os bastidores da criação de interfaces para impulsionar e inspirar a comunidade de design.</p>
+    </div>
+
+    <div class="about-row about-row--indent">
+        <div class="about-image">
+            <img src="{% static 'blog/images/equipe.avif' %}" alt="Equipe UXBlog">
         </div>
     </div>
 
-    <div class="lapalma-image-wrapper">
-        <!-- Imagem da equipe puxada do diretório static -->
-        <img src="{% static 'blog/images/equipe.png' %}" alt="Equipe DevBlog" style="width: 100%; height: auto; display: block; border-radius: 4px;">
+    <div class="about-row about-row--indent">
+        <div class="about-text-block">
+            <p>Para guiar nossos conteúdos e a forma como enxergamos a nossa profissão, nos apoiamos em princípios fundamentais:</p>
+
+            <div class="about-principles">
+                <div class="about-principle">
+                    <h3>Empatia no centro de tudo</h3>
+                    <p>Projetamos e escrevemos para pessoas, buscando sempre entender o contexto e a jornada do usuário.</p>
+                </div>
+                <div class="about-principle">
+                    <h3>Comunicação acessível</h3>
+                    <p>Acreditamos que tanto as interfaces quanto o conhecimento devem ter uma linguagem clara, direta e amigável.</p>
+                </div>
+                <div class="about-principle">
+                    <h3>Estética aliada à função</h3>
+                    <p>Valorizamos o refinamento visual e criações sofisticadas, desde que caminhem lado a lado com a usabilidade.</p>
+                </div>
+                <div class="about-principle">
+                    <h3>Evolução contínua</h3>
+                    <p>O mercado de tecnologia não para, e nosso compromisso é aprender, testar e compartilhar essas descobertas em conjunto.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="lapalma-footer-text">
-        Não tem mais muito o que falar, ainda está em desenvolvimento.
-    </div>
-</div>
+</section>
 {% endblock %}

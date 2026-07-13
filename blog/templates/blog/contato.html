@@ -1,12 +1,55 @@
 {% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Fale conosco — UXBlog{% endblock %}
 
 {% block content %}
-    <h2>Fale Conosco</h2>
-    <p>Envie-nos uma mensagem, crítica ou sugestão.</p>
+<section class="container form-page">
 
-    <form method="POST">
+    <h1 class="title-deco title-deco--page">
+        <span class="title-deco__dot-wrap title-deco__dot-wrap--start" aria-hidden="true"><span class="title-deco__dot"></span></span>
+        Fale conosco
+        <span class="title-deco__dot-wrap title-deco__dot-wrap--end" aria-hidden="true"><span class="title-deco__dot"></span></span>
+    </h1>
+
+    <hr class="divider" style="margin: var(--space-6) 0;">
+
+    <form class="form" method="POST" novalidate>
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary mt-3">Enviar Mensagem</button>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label" for="{{ form.nome.id_for_label }}">Nome</label>
+                {{ form.nome }}
+                {% if form.nome.errors %}
+                <ul class="form-errors">{% for error in form.nome.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="{{ form.email.id_for_label }}">E-mail</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                <ul class="form-errors">{% for error in form.email.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="{{ form.mensagem.id_for_label }}">Mensagem</label>
+            {{ form.mensagem }}
+            {% if form.mensagem.errors %}
+            <ul class="form-errors">{% for error in form.mensagem.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn--cta">
+                Enviar
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+        </div>
     </form>
+
+</section>
 {% endblock %}

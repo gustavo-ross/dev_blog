@@ -1,0 +1,83 @@
+/*
+  UXBlog — reskin do Django Admin.
+  Sobrescreve só as CSS custom properties que o admin já usa
+  (venv/Lib/site-packages/django/contrib/admin/static/admin/css/base.css),
+  então a paleta segue os mesmos tokens de blog/static/blog/css/tokens.css
+  sem precisar reescrever a marcação do admin.
+*/
+
+:root,
+html[data-theme="light"] {
+  --primary: #ff4400;
+  --secondary: #333333;
+  --accent: #ff4400;
+  --primary-fg: #fcfaf6;
+
+  --header-color: #fcfaf6;
+  --header-branding-color: #ff4400;
+  --header-bg: #333333;
+  --header-link-color: #fcfaf6;
+
+  --breadcrumbs-fg: #efede9;
+  --breadcrumbs-link-fg: #fcfaf6;
+  --breadcrumbs-bg: #333333;
+
+  --link-fg: #ff4400;
+  --link-hover-color: #cc3600;
+  --link-selected-fg: #ff4400;
+
+  --hairline-color: #e0dfdb;
+  --border-color: #e0dfdb;
+
+  /* Cabeçalho das tabelas (thead th a) e os links do painel de filtro
+     (#changelist-filter a) usam --body-quiet-color pro texto. O padrão do
+     Django (#666) em cima de --darkened-bg (quase branco) fica com contraste
+     baixo demais — trocamos pro nosso Black 0. */
+  --body-quiet-color: #333333;
+
+  --button-fg: #fcfaf6;
+  --button-bg: #ff4400;
+  --button-hover-bg: #cc3600;
+  --default-button-bg: #333333;
+  --default-button-hover-bg: #1a1a1a;
+
+  --selected-bg: #efede9;
+  --selected-row: #fff2ea;
+
+  --font-family-primary:
+    "Space Grotesk",
+    "Segoe UI",
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+}
+
+#branding h1,
+#branding h1 a:link,
+#branding h1 a:visited {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.module h2,
+.module caption,
+.inline-group h2 {
+  border-radius: 0;
+}
+
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button {
+  border-radius: 2px;
+}
+
+img.thumbnail-preview {
+  width: 64px;
+  height: 36px;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}

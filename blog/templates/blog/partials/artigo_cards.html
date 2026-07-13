@@ -1,0 +1,21 @@
+{% for artigo in lista_artigos %}
+<li>
+    <a class="article-card" href="{% url 'detalhe_artigo' artigo.id %}">
+        <span class="article-card__date">{{ artigo.data_publicacao|date:"d \d\e M, Y" }}</span>
+
+        <span class="article-card__image">
+            {% if artigo.imagem %}
+                <img src="{{ artigo.imagem.url }}" alt="" loading="lazy">
+            {% endif %}
+        </span>
+
+        <span class="article-card__body">
+            <span class="tag">{{ artigo.categoria.nome }}</span>
+            <span class="article-card__title">{{ artigo.titulo }}</span>
+            <span class="article-card__excerpt">{{ artigo.conteudo|truncatechars:240 }}</span>
+        </span>
+    </a>
+</li>
+{% empty %}
+<li class="empty-state">Nenhuma notícia publicada ainda.</li>
+{% endfor %}

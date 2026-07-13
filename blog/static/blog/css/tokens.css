@@ -1,0 +1,73 @@
+/*
+  UXBlog — Design System tokens
+  Fonte da verdade das cores/tipografia/espaçamento do site (extraído do Figma).
+  Para trocar a paleta do blog inteiro, edite apenas este arquivo.
+*/
+
+:root {
+  /* Cores — nomes conforme as variáveis do Figma */
+  --color-orange: #ff4400;         /* Destaque, CTA, links ativos */
+  --color-black-0: #333333;        /* Texto primário, footer, títulos */
+  --color-gray-0: #666666;         /* Texto secundário */
+  --color-gray-1: #999999;         /* Placeholder de formulário */
+  --color-white-1: #fcfaf6;        /* Bg de inputs / botões secundários */
+  --color-white-0: #efede9;        /* Bg da página */
+  --color-white-n1: #e5e3df;       /* Bg da seção hero do artigo */
+  --color-line-0: #e0dfdb;         /* Bordas */
+
+  /* Papéis semânticos (o resto do CSS usa estes, não as cores cruas acima) */
+  --color-bg-page: var(--color-white-0);
+  --color-bg-surface: var(--color-white-1);
+  --color-bg-hero: var(--color-white-n1);
+  --color-bg-inverse: var(--color-black-0);
+  --color-text-primary: var(--color-black-0);
+  --color-text-secondary: var(--color-gray-0);
+  --color-text-placeholder: var(--color-gray-1);
+  --color-text-inverse: var(--color-white-0);
+  --color-accent: var(--color-orange);
+  --color-accent-bg: rgba(255, 68, 0, 0.1);
+  --color-accent-border: rgba(255, 68, 0, 0.2);
+  --color-border: var(--color-line-0);
+
+  /* Tipografia */
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.5rem;     /* 24px */
+  --text-2xl: 2rem;      /* 32px */
+  --text-3xl: 2.5rem;    /* 40px */
+  --text-4xl: 4rem;      /* 64px */
+
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+
+  /* Espaçamento (escala em rem, base 4px) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+
+  --radius-sm: 2px;
+  --radius-full: 999px;
+
+  --container-max: 1200px;
+  --container-padding: 1rem;
+
+  /* Breakpoints — documentados aqui para referência, media queries não
+     aceitam var() no valor da condição, então repita os números abaixo. */
+  --bp-sm: 640px;
+  --bp-md: 900px;
+  --bp-lg: 1200px;
+}

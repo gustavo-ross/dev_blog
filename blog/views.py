@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Artigo, Categoria
@@ -7,10 +8,12 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import ArtigoSerializer, CategoriaSerializer
 
+ARTIGOS_POR_PAGINA = 5
+
 def home(request):
     # Captura o ID da categoria pela URL (ex: /?categoria=1)
     categoria_id = request.GET.get('categoria')
-    
+
     # Se existe um ID na URL, filtramos. Se não, mostramos tudo.
     if categoria_id:
         noticias = Artigo.objects.filter(categoria_id=categoria_id)
@@ -20,11 +23,25 @@ def home(request):
         noticias = Artigo.objects.all()
         categoria_atual = None
 
+    noticias = noticias.order_by('-data_publicacao')
+
+    paginator = Paginator(noticias, ARTIGOS_POR_PAGINA)
+    pagina_atual = paginator.get_page(request.GET.get('page'))
+
+    # O botão "Ver mais" busca essa mesma view via fetch() e só precisa da
+    # lista de cards nova para anexar no DOM, sem recarregar a página.
+    if request.headers.get('X-Requested-With') == 'fetch':
+        resposta = render(request, 'blog/partials/artigo_cards.html', {'lista_artigos': pagina_atual})
+        resposta['X-Has-Next'] = 'true' if pagina_atual.has_next() else 'false'
+        resposta['X-Next-Page'] = str(pagina_atual.next_page_number()) if pagina_atual.has_next() else ''
+        return resposta
+
     # As categorias do menu precisam carregar sempre
     categorias = Categoria.objects.all()
-    
+
     contexto = {
-        'lista_artigos': noticias,
+        'lista_artigos': pagina_atual,
+        'page_obj': pagina_atual,
         'lista_categorias': categorias,
         'categoria_atual': categoria_atual, # Enviamos a categoria filtrada para o HTML
     }
@@ -58,12 +75,13 @@ def fale_conosco(request):
         if formulario.is_valid():
             formulario.save()
             return redirect('home')
-        
+
     else:
         formulario = ContatoForm()
 
     contexto = {
-        'form': formulario
+        'form': formulario,
+        'lista_categorias': Categoria.objects.all(),
     }
 
     return render(request, 'blog/contato.html', contexto)

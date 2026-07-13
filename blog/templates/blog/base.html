@@ -4,55 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevBlog</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+    <title>{% block title %}UXBlog{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'blog/css/tokens.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/components.css' %}">
+    {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-light d-flex flex-column min-vh-100">
+<body>
 
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="{% url 'home' %}">👍 DevBlog</a>
-                
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
-                    <span class="navbar-toggler-icon"></span>
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a class="logo logo--dark" href="{% url 'home' %}">
+                <span class="logo__accent">UX</span>Blog
+            </a>
+
+            <nav class="nav" id="site-nav" aria-label="Navegação principal">
+                <a class="nav__link{% if request.resolver_match.url_name == 'home' %} is-active{% endif %}" href="{% url 'home' %}">Home</a>
+                <a class="nav__link{% if request.resolver_match.url_name == 'sobre_nos' %} is-active{% endif %}" href="{% url 'sobre_nos' %}">Sobre nós</a>
+                <a class="nav__link{% if request.resolver_match.url_name == 'fale_conosco' %} is-active{% endif %}" href="{% url 'fale_conosco' %}">Contato</a>
+                <button type="button" class="nav__categories-btn" data-drawer-open aria-haspopup="dialog" aria-controls="categories-drawer">
+                    Categorias
+                    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
-                
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home' %}">Inicio</a> 
-                        </li>
-                        
-                        {% for categoria in lista_categorias %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home' %}?categoria={{ categoria.id }}">{{ categoria.nome }}</a>
-                        </li>
-                        {% endfor %}
-                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'sobre_nos' %}">Sobre</a> 
-                        </li>
+            </nav>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'fale_conosco' %}">Contato</a> 
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+            <button type="button" class="nav-toggle" data-nav-toggle aria-controls="site-nav" aria-expanded="false">
+                <span class="visually-hidden">Abrir menu</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+        </div>
     </header>
 
-    <main class="container my-5 flex-grow-1">
+    <main>
         {% block content %}
         {% endblock %}
     </main>
 
-    <footer class="bg-dark text-white text-center py-4">
-        <p class="mb-0">© 2026 Desenvolvido pela Turma Python</p>
+    <footer class="site-footer">
+        <div class="container site-footer__inner">
+            <a class="logo logo--white" href="{% url 'home' %}">
+                <span class="logo__accent">UX</span>Blog
+            </a>
+            <p class="site-footer__copy">©UXBlog, 2026</p>
+        </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <div class="drawer-overlay" data-drawer-overlay></div>
+    <aside class="drawer" id="categories-drawer" role="dialog" aria-label="Categorias" aria-modal="true">
+        <div class="drawer__header">
+            <button type="button" class="btn btn--icon" data-drawer-close aria-label="Fechar categorias">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <p class="drawer__title">Categorias</p>
+        </div>
+        <div class="drawer__list">
+            {% for categoria in lista_categorias %}
+            <a class="drawer__link{% if categoria_atual.id == categoria.id %} is-active{% endif %}" href="{% url 'home' %}?categoria={{ categoria.id }}">
+                {{ categoria.nome }}
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            {% empty %}
+            <p class="empty-state">Nenhuma categoria cadastrada.</p>
+            {% endfor %}
+        </div>
+    </aside>
+
+    <script src="{% static 'blog/js/main.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>
